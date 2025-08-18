@@ -183,7 +183,17 @@ function validarPosicion (btnId, colunm, row)
             const player = getPlayer(gameTurn)
             btnId.textContent = player;
             position = true;
+            
             gameTurn += 1;
+            if(gameTurn >= 5)
+            {
+                
+                console.log("Ya esta verificando si se gano")
+            }
+            else
+            {
+
+            }
             console.log(gameTurn)
             return position;
         }
@@ -199,6 +209,7 @@ function validarPosicion (btnId, colunm, row)
 function putPosition(colunm, row,)
 {
     matrizGame[colunm][row] = player;
+    winverification(matrizGame)
 }
 
 
@@ -217,4 +228,35 @@ function getPlayer(gameTurn)
         player = "O"
     };
     return player;
+}
+let PlayerXPoint = 0
+let PlayerOPoint = 0
+
+function winverification(matrizGame)
+{
+
+    for(let i = 0; i <= 2; i++)
+    {
+        PlayerXPoint = 0;
+        PlayerOPoint = 0;
+        for(let j = 0; j <= 2; j++)
+        {
+            if(matrizGame[i][j] === "X")
+            {
+                PlayerXPoint++
+            }
+            else if(matrizGame[i][j] === "O")
+            {
+                PlayerOPoint++
+            }
+        }
+        if(PlayerXPoint === 3)
+        {
+            alert("Jugador X gano ")
+        }
+        else if (PlayerOPoint === 3)
+        {
+            alert("Jugador O gano ")
+        }
+    }
 }
