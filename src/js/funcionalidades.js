@@ -13,15 +13,31 @@ let win;
 
 console.log(matrizGame)
 
-//console.log(matrizGame[2][2])
+
 
 let player = "X"
 let gameTurn = 0;
+const playerTurn = document.getElementById
+
 
 if(gameTurn === 0)
 {
     win = false;
+    console.log(player)
+    console.log()
+    
 }
+
+
+
+
+
+console.log("----", gameTurn)
+
+
+
+
+
 
 
 if(win == false)
@@ -183,6 +199,7 @@ if(win == false)
 }
 
 
+
 function validarPosicion (btnId, colunm, row)
 {
     let position = "";
@@ -191,6 +208,7 @@ function validarPosicion (btnId, colunm, row)
         if(matrizGame[colunm][row] !== "X" && matrizGame[colunm][row] !== "O")
         {
             const player = getPlayer(gameTurn)
+            
             const text = document.createElement("h1")
             
             btnId.textContent = player
@@ -219,9 +237,24 @@ function validarPosicion (btnId, colunm, row)
     }
 }
 
+
+const playerPlaying = document.getElementById("playerPlaying")
 function putPosition(colunm, row,)
 {
+    
     matrizGame[colunm][row] = player;
+    
+    playerPlaying.textContent = player;
+
+    if(player === "X")
+    {
+        playerPlaying.textContent = "O"
+    }
+    else if(player === "O")
+    {
+        playerPlaying.textContent = "X"
+    }
+
     winverification(matrizGame)
 }
 
@@ -236,15 +269,26 @@ function getPlayer(gameTurn)
     {
         player = "X"
     }
-    else
+    else if(gameTurn % 2 !== 0)
     {
         player = "O"
     };
+
+
+
+
     return player;
 }
 
 let PlayerXPoint = 0
 let PlayerOPoint = 0
+
+const turnOf = document.getElementById("turnOf");
+function hideTurnOF()
+{
+    document.getElementById("turnOf").style.display = "none";
+}
+
 
 function winverification(matrizGame)
 {
@@ -266,13 +310,13 @@ function winverification(matrizGame)
         }
         if(PlayerXPoint === 3)
         {
-            
+            hideTurnOF()
             win = true;
             break;
         }
         else if (PlayerOPoint === 3)
         {
-            
+            hideTurnOF()
             win = true;
             break;
         }
@@ -297,13 +341,13 @@ function winverification(matrizGame)
         }
         if(PlayerXPoint === 3)
         {
-            
+            hideTurnOF()
             win = true;
             break;
         }
         else if (PlayerOPoint === 3)
         {
-            
+            hideTurnOF()
             win = true;
             break;
         }
@@ -323,13 +367,13 @@ function winverification(matrizGame)
         }
         if(PlayerXPoint === 3)
         {
-            
+            hideTurnOF()
             win = true;
             break;
         }
         else if (PlayerOPoint === 3)
         {
-            
+            hideTurnOF()
             win = true;
             break;
         }
@@ -339,13 +383,13 @@ function winverification(matrizGame)
     PlayerOPoint = 0
     if(matrizGame[2][0] == "X" && matrizGame[1][1] == "X" && matrizGame[0][2] == "X" )
     {
-        
+        hideTurnOF()
         win = true;
         
     }
     else if(matrizGame[2][0] == "O" && matrizGame[1][1] == "O" && matrizGame[0][2] == "O" )
     {
-        
+        hideTurnOF()
         win = true
     }
     btnsOff(win)
@@ -365,6 +409,7 @@ function btnsOff(win)
         }
         else if(gameTurn === 9)
         {
+            hideTurnOF()
             document.getElementById("btnBox"+i).disabled = true;
             winnerSign.textContent = "Empate"
         }
@@ -375,6 +420,8 @@ const btnReset = document.getElementById("btnReset");
 
 btnReset.addEventListener("click", function()
 {
+    document.getElementById("playerPlaying").textContent = "X"
+    document.getElementById("turnOf").style.display = "block";
     document.getElementById("winnerSign").textContent = "";
     matrizGame =
     [
@@ -393,3 +440,9 @@ btnReset.addEventListener("click", function()
     win = false;
     gameTurn = 0
 })
+
+
+
+
+
+
