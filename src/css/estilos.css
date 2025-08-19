@@ -50,10 +50,9 @@
     background-color: blueviolet;
 }
 
-#winnerSign
+#winnerSignContainer
 {
-    background-color: blueviolet;
-    
+    width: 100%;
 }
 
 #btnsContainer
@@ -73,6 +72,7 @@
 
 .btnsBoxes
 {
+    
     font-size: 10vh;
     background-color: transparent;
     border: none;

@@ -9,6 +9,8 @@ const matrizGame =
     [, , ] 
 ]
 
+let win;
+
 console.log(matrizGame)
 
 //console.log(matrizGame[2][2])
@@ -16,161 +18,168 @@ console.log(matrizGame)
 let player = "X"
 let gameTurn = 0;
 
-
-
-
-const btnBox0 = document.getElementById("btnBox0");
-btnBox0.addEventListener("click", function()
+if(gameTurn === 0)
 {
-    const position = validarPosicion (btnBox0, 0, 0)
-    console.log(matrizGame)
+    win = false;
+}
 
-    if(position == true)
-    {
-        putPosition(0,0)
-    }
-    else
-    {
-        
-    }
 
-})
-
-const btnBox1 = document.getElementById("btnBox1");
-btnBox1.addEventListener("click", function()
+if(win == false)
 {
-    const position = validarPosicion (btnBox1, 0, 1 )
-    console.log(matrizGame)
 
-    if(position == true)
+    const btnBox0 = document.getElementById("btnBox0");
+    btnBox0.addEventListener("click", function()
     {
-        putPosition(0,1)
-    }
-    else
+        const position = validarPosicion (btnBox0, 0, 0)
+        console.log(matrizGame)
+
+        if(position == true)
+        {
+            putPosition(0,0)
+        }
+        else
+        {
+            
+        }
+
+    })
+
+    const btnBox1 = document.getElementById("btnBox1");
+    btnBox1.addEventListener("click", function()
     {
-        
-    }
+        const position = validarPosicion (btnBox1, 0, 1 )
+        console.log(matrizGame)
 
-})
+        if(position == true)
+        {
+            putPosition(0,1)
+        }
+        else
+        {
+            
+        }
 
-const btnBox2 = document.getElementById("btnBox2");
-btnBox2.addEventListener("click", function()
-{
-    const position = validarPosicion (btnBox2, 0, 2 )
-    console.log(matrizGame)
+    })
 
-    if(position == true)
+    const btnBox2 = document.getElementById("btnBox2");
+    btnBox2.addEventListener("click", function()
     {
-        putPosition(0,2)
-    }
-    else
+        const position = validarPosicion (btnBox2, 0, 2 )
+        console.log(matrizGame)
+
+        if(position == true)
+        {
+            putPosition(0,2)
+        }
+        else
+        {
+            
+        }
+
+    })
+
+    const btnBox3 = document.getElementById("btnBox3");
+    btnBox3.addEventListener("click", function()
     {
-        
-    }
+        const position = validarPosicion (btnBox3, 1, 0 )
+        console.log(matrizGame)
 
-})
+        if(position == true)
+        {
+            putPosition(1,0)
+        }
+        else
+        {
+            
+        }
 
-const btnBox3 = document.getElementById("btnBox3");
-btnBox3.addEventListener("click", function()
-{
-    const position = validarPosicion (btnBox3, 1, 0 )
-    console.log(matrizGame)
+    })
 
-    if(position == true)
+    const btnBox4 = document.getElementById("btnBox4");
+    btnBox4.addEventListener("click", function()
     {
-        putPosition(1,0)
-    }
-    else
+        const position = validarPosicion (btnBox4, 1, 1 )
+        console.log(matrizGame)
+
+        if(position == true)
+        {
+            putPosition(1,1)
+        }
+        else
+        {
+            
+        }
+
+    })
+
+    const btnBox5 = document.getElementById("btnBox5");
+    btnBox5.addEventListener("click", function()
     {
-        
-    }
+        const position = validarPosicion (btnBox5, 1, 2 )
+        console.log(matrizGame)
 
-})
+        if(position == true)
+        {
+            putPosition(1, 2)
+        }
+        else
+        {
+            
+        }
 
-const btnBox4 = document.getElementById("btnBox4");
-btnBox4.addEventListener("click", function()
-{
-    const position = validarPosicion (btnBox4, 1, 1 )
-    console.log(matrizGame)
+    })
 
-    if(position == true)
+    const btnBox6 = document.getElementById("btnBox6");
+    btnBox6.addEventListener("click", function()
     {
-        putPosition(1,1)
-    }
-    else
+        const position = validarPosicion (btnBox6, 2, 0 )
+        console.log(matrizGame)
+
+        if(position == true)
+        {
+            putPosition(2, 0)
+        }
+        else
+        {
+            
+        }
+
+    })
+
+    const btnBox7 = document.getElementById("btnBox7");
+    btnBox7.addEventListener("click", function()
     {
-        
-    }
+        const position = validarPosicion (btnBox7, 2, 1 )
+        console.log(matrizGame)
 
-})
+        if(position == true)
+        {
+            putPosition(2,1)
+        }
+        else
+        {
+            
+        }
 
-const btnBox5 = document.getElementById("btnBox5");
-btnBox5.addEventListener("click", function()
-{
-    const position = validarPosicion (btnBox5, 1, 2 )
-    console.log(matrizGame)
+    })
 
-    if(position == true)
+    const btnBox8 = document.getElementById("btnBox8");
+    btnBox8.addEventListener("click", function()
     {
-        putPosition(1, 2)
-    }
-    else
-    {
-        
-    }
+        const position = validarPosicion (btnBox8, 2, 2 )
+        console.log(matrizGame)
 
-})
+        if(position == true)
+        {
+            putPosition(2,2)
+        }
+        else
+        {
+            
+        }
 
-const btnBox6 = document.getElementById("btnBox6");
-btnBox6.addEventListener("click", function()
-{
-    const position = validarPosicion (btnBox6, 2, 0 )
-    console.log(matrizGame)
-
-    if(position == true)
-    {
-        putPosition(2, 0)
-    }
-    else
-    {
-        
-    }
-
-})
-
-const btnBox7 = document.getElementById("btnBox7");
-btnBox7.addEventListener("click", function()
-{
-    const position = validarPosicion (btnBox7, 2, 1 )
-    console.log(matrizGame)
-
-    if(position == true)
-    {
-        putPosition(2,1)
-    }
-    else
-    {
-        
-    }
-
-})
-
-const btnBox8 = document.getElementById("btnBox8");
-btnBox8.addEventListener("click", function()
-{
-    const position = validarPosicion (btnBox8, 2, 2 )
-    console.log(matrizGame)
-
-    if(position == true)
-    {
-        putPosition(2,2)
-    }
-    else
-    {
-        
-    }
-
-})
+    })
+}
 
 
 function validarPosicion (btnId, colunm, row)
@@ -229,12 +238,13 @@ function getPlayer(gameTurn)
     };
     return player;
 }
+
 let PlayerXPoint = 0
 let PlayerOPoint = 0
 
 function winverification(matrizGame)
 {
-
+    //Verificar si hay ganador en horizontal
     for(let i = 0; i <= 2; i++)
     {
         PlayerXPoint = 0;
@@ -252,11 +262,107 @@ function winverification(matrizGame)
         }
         if(PlayerXPoint === 3)
         {
-            alert("Jugador X gano ")
+            alert("Jugador X gano 1 ")
+            win = true;
+            break;
         }
         else if (PlayerOPoint === 3)
         {
-            alert("Jugador O gano ")
+            alert("Jugador O gano 1 ")
+            win = true;
+            break;
+        }
+    }
+    //verificar si se gano en vertical 
+    PlayerXPoint = 0
+    PlayerOPoint = 0
+    for(let i = 0; i <= 2; i++)
+    {
+        PlayerXPoint = 0;
+        PlayerOPoint = 0;
+        for(let j = 0; j <= 2; j++)
+        {
+            if(matrizGame[j][i] === "X")
+            {
+                PlayerXPoint++
+            }
+            else if(matrizGame[j][i] === "O")
+            {
+                PlayerOPoint++
+            }
+        }
+        if(PlayerXPoint === 3)
+        {
+            alert("Jugador X gano  2")
+            win = true;
+            break;
+        }
+        else if (PlayerOPoint === 3)
+        {
+            alert("Jugador O gano  2")
+            win = true;
+            break;
+        }
+    }
+    //Verificar si se gano en diagonal arriba izquierda derecha abajo 
+    PlayerXPoint = 0
+    PlayerOPoint = 0
+    for(let i = 0; i <= 2; i++)
+    {
+        if(matrizGame[i][i] === "X")
+        {
+            PlayerXPoint++
+        }
+        else if(matrizGame[i][i] === "O")
+        {
+            PlayerOPoint++
+        }
+        if(PlayerXPoint === 3)
+        {
+            alert("Jugador X gano  3")
+            win = true;
+            break;
+        }
+        else if (PlayerOPoint === 3)
+        {
+            alert("Jugador O gano 3")
+            win = true;
+            break;
+        }
+    }
+    //Verificar si se gano en diagonal abajo izquierda derecha arriba
+    PlayerXPoint = 0
+    PlayerOPoint = 0
+    if(matrizGame[2][0] == "X" && matrizGame[1][1] == "X" && matrizGame[0][2] == "X" )
+    {
+        alert("Jugador X gano 4 ")
+        win = true;
+        
+    }
+    else if(matrizGame[2][0] == "X" && matrizGame[1][1] == "X" && matrizGame[0][2] == "X" )
+    {
+        alert("Jugador O gano 4 ")
+        win = true
+    }
+    btnsOff(win)
+}
+
+const winnerSign = document.getElementById("winnerSign");
+
+function btnsOff(win)
+{
+    for(i = 0; i <= 8; i++)
+    {
+        if(win === true)
+        {
+            console.log("btnBox"+i)
+            document.getElementById("btnBox"+i).disabled = true;
+            winnerSign.textContent = `Ganó el jugador: ${player}`;
+        }
+        else if(gameTurn === 9)
+        {
+            document.getElementById("btnBox"+i).disabled = true;
+            winnerSign.textContent = "Empate"
         }
     }
 }
