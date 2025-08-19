@@ -2,7 +2,7 @@
 
 
 
-const matrizGame =
+let matrizGame =
 [
     [, , ],
     [, , ],
@@ -26,6 +26,7 @@ if(gameTurn === 0)
 
 if(win == false)
 {
+    
 
     const btnBox0 = document.getElementById("btnBox0");
     btnBox0.addEventListener("click", function()
@@ -190,7 +191,10 @@ function validarPosicion (btnId, colunm, row)
         if(matrizGame[colunm][row] !== "X" && matrizGame[colunm][row] !== "O")
         {
             const player = getPlayer(gameTurn)
-            btnId.textContent = player;
+            const text = document.createElement("h1")
+            
+            btnId.textContent = player
+
             position = true;
             
             gameTurn += 1;
@@ -262,13 +266,13 @@ function winverification(matrizGame)
         }
         if(PlayerXPoint === 3)
         {
-            alert("Jugador X gano 1 ")
+            
             win = true;
             break;
         }
         else if (PlayerOPoint === 3)
         {
-            alert("Jugador O gano 1 ")
+            
             win = true;
             break;
         }
@@ -293,13 +297,13 @@ function winverification(matrizGame)
         }
         if(PlayerXPoint === 3)
         {
-            alert("Jugador X gano  2")
+            
             win = true;
             break;
         }
         else if (PlayerOPoint === 3)
         {
-            alert("Jugador O gano  2")
+            
             win = true;
             break;
         }
@@ -319,13 +323,13 @@ function winverification(matrizGame)
         }
         if(PlayerXPoint === 3)
         {
-            alert("Jugador X gano  3")
+            
             win = true;
             break;
         }
         else if (PlayerOPoint === 3)
         {
-            alert("Jugador O gano 3")
+            
             win = true;
             break;
         }
@@ -335,13 +339,13 @@ function winverification(matrizGame)
     PlayerOPoint = 0
     if(matrizGame[2][0] == "X" && matrizGame[1][1] == "X" && matrizGame[0][2] == "X" )
     {
-        alert("Jugador X gano 4 ")
+        
         win = true;
         
     }
-    else if(matrizGame[2][0] == "X" && matrizGame[1][1] == "X" && matrizGame[0][2] == "X" )
+    else if(matrizGame[2][0] == "O" && matrizGame[1][1] == "O" && matrizGame[0][2] == "O" )
     {
-        alert("Jugador O gano 4 ")
+        
         win = true
     }
     btnsOff(win)
@@ -366,3 +370,26 @@ function btnsOff(win)
         }
     }
 }
+
+const btnReset = document.getElementById("btnReset");
+
+btnReset.addEventListener("click", function()
+{
+    document.getElementById("winnerSign").textContent = "";
+    matrizGame =
+    [
+        [, , ],
+        [, , ],
+        [, , ] 
+    ]
+    for(i = 0; i <= 8; i++)
+    {
+        document.getElementById("btnBox"+i).disabled = false;
+        console.log("btnBox"+i)
+        document.getElementById("btnBox"+i).textContent = "";
+        
+        
+    }
+    win = false;
+    gameTurn = 0
+})
