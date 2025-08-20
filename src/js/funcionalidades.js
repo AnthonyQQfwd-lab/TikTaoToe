@@ -23,27 +23,12 @@ const playerTurn = document.getElementById
 if(gameTurn === 0)
 {
     win = false;
-    console.log(player)
-    console.log()
-    
 }
-
-
-
-
 
 console.log("----", gameTurn)
 
-
-
-
-
-
-
 if(win == false)
 {
-    
-
     const btnBox0 = document.getElementById("btnBox0");
     btnBox0.addEventListener("click", function()
     {
@@ -56,9 +41,8 @@ if(win == false)
         }
         else
         {
-            
+        
         }
-
     })
 
     const btnBox1 = document.getElementById("btnBox1");
@@ -73,9 +57,8 @@ if(win == false)
         }
         else
         {
-            
+        
         }
-
     })
 
     const btnBox2 = document.getElementById("btnBox2");
@@ -90,9 +73,8 @@ if(win == false)
         }
         else
         {
-            
+        
         }
-
     })
 
     const btnBox3 = document.getElementById("btnBox3");
@@ -100,16 +82,14 @@ if(win == false)
     {
         const position = validarPosicion (btnBox3, 1, 0 )
         console.log(matrizGame)
-
         if(position == true)
         {
             putPosition(1,0)
         }
         else
         {
-            
+        
         }
-
     })
 
     const btnBox4 = document.getElementById("btnBox4");
@@ -117,7 +97,6 @@ if(win == false)
     {
         const position = validarPosicion (btnBox4, 1, 1 )
         console.log(matrizGame)
-
         if(position == true)
         {
             putPosition(1,1)
@@ -126,7 +105,6 @@ if(win == false)
         {
             
         }
-
     })
 
     const btnBox5 = document.getElementById("btnBox5");
@@ -141,9 +119,8 @@ if(win == false)
         }
         else
         {
-            
+        
         }
-
     })
 
     const btnBox6 = document.getElementById("btnBox6");
@@ -151,16 +128,14 @@ if(win == false)
     {
         const position = validarPosicion (btnBox6, 2, 0 )
         console.log(matrizGame)
-
         if(position == true)
         {
             putPosition(2, 0)
         }
         else
         {
-            
+        
         }
-
     })
 
     const btnBox7 = document.getElementById("btnBox7");
@@ -168,16 +143,14 @@ if(win == false)
     {
         const position = validarPosicion (btnBox7, 2, 1 )
         console.log(matrizGame)
-
         if(position == true)
         {
             putPosition(2,1)
         }
         else
         {
-            
+        
         }
-
     })
 
     const btnBox8 = document.getElementById("btnBox8");
@@ -185,20 +158,16 @@ if(win == false)
     {
         const position = validarPosicion (btnBox8, 2, 2 )
         console.log(matrizGame)
-
         if(position == true)
         {
             putPosition(2,2)
         }
         else
         {
-            
+        
         }
-
     })
 }
-
-
 
 function validarPosicion (btnId, colunm, row)
 {
@@ -208,13 +177,9 @@ function validarPosicion (btnId, colunm, row)
         if(matrizGame[colunm][row] !== "X" && matrizGame[colunm][row] !== "O")
         {
             const player = getPlayer(gameTurn)
-            
             const text = document.createElement("h1")
-            
             btnId.textContent = player
-
             position = true;
-            
             gameTurn += 1;
             if(gameTurn >= 5)
             {
@@ -237,15 +202,11 @@ function validarPosicion (btnId, colunm, row)
     }
 }
 
-
 const playerPlaying = document.getElementById("playerPlaying")
 function putPosition(colunm, row,)
 {
-    
     matrizGame[colunm][row] = player;
-    
     playerPlaying.textContent = player;
-
     if(player === "X")
     {
         playerPlaying.textContent = "O"
@@ -254,10 +215,17 @@ function putPosition(colunm, row,)
     {
         playerPlaying.textContent = "X"
     }
+    //verificar si se gano solo cuando sea posible ganar en el quinto turno o mas
+    if(gameTurn >= 5)
+    {
+        winverification(matrizGame)
+    }
+    else
+    {
 
-    winverification(matrizGame)
+    }
+    
 }
-
 
 function getPlayer(gameTurn)
 {
@@ -273,10 +241,6 @@ function getPlayer(gameTurn)
     {
         player = "O"
     };
-
-
-
-
     return player;
 }
 
@@ -288,7 +252,6 @@ function hideTurnOF()
 {
     document.getElementById("turnOf").style.display = "none";
 }
-
 
 function winverification(matrizGame)
 {
@@ -396,7 +359,6 @@ function winverification(matrizGame)
 }
 
 const winnerSign = document.getElementById("winnerSign");
-
 function btnsOff(win)
 {
     for(i = 0; i <= 8; i++)
@@ -417,7 +379,6 @@ function btnsOff(win)
 }
 
 const btnReset = document.getElementById("btnReset");
-
 btnReset.addEventListener("click", function()
 {
     document.getElementById("playerPlaying").textContent = "X"
@@ -440,9 +401,3 @@ btnReset.addEventListener("click", function()
     win = false;
     gameTurn = 0
 })
-
-
-
-
-
-

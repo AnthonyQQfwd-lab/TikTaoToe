@@ -6,19 +6,28 @@
     
     height: 100vh;
     width: 100%;
-    background-image: url(../imagenes/BackGroundGame.png);
+    
 }
-
 #scoreboardContainer
 {
     height: 100%;
     width: 30%;
     background-color: red;
     background-color: rgba(0, 0, 0, 0.2);
+    background-image: url(../imagenes/scoreboard.png);
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #table
 {
+    background-image: url(../imagenes/BackGroundGame.png);
+    background-position: 50% 100%;
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+
     display: grid;
     justify-content: center;
     height: 100%;
@@ -31,15 +40,19 @@
 
 #gameContainer
 {
+    position: fixed;
     display: grid;
     grid-template-columns: repeat(3,60px);
     grid-template-rows: repeat(3,60px);
     width: fit-content;
-    background-color: rgba(0, 0, 0, 0.2);
-    gap: 10px; 
-    row-gap: 10px;
-    column-gap: 10px;
     
+    gap: 30px; 
+    row-gap: 10vh;
+    column-gap: 12vh;
+    margin-left: 8vh;
+    margin-top: 5vh;
+    height: 56vh;
+    width: 67vh;
 
 }
 
@@ -49,33 +62,45 @@
     justify-content: center;
     text-align: center;
     font-size: 10vh;
-    
+    height: 100px;
+    width: 18vh;
     contain: content;
     background-color: transparent;
-    border: 1px black solid;
+    
 }
 
 #winnerSignContainer
 {
+    position: fixed;
     width: 100%;
     text-align: center;
     font-family: 'Finger Paint', cursive;
+    top: 0;
 }
 
 #btnsContainer
 {
-    
+    position: fixed;
     display: grid;
     background-color: transparent;
     height: 50px;
     width: 100%;
-    margin-bottom: 200px;
-    place-items: center;
+    top: 0;
+    margin-left: 145%;
 }
 
 #btnReset
 {
-    
+    height: 90px;
+    width: 120px; 
+    border: none;
+    background-color: transparent;
+    background-image: url("../imagenes/btn\ reset.png");
+    background-size: cover;         
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;  
+    top: 0;
 }
 
 .btnsBoxes
@@ -93,3 +118,10 @@
     
 }
 
+#turnOf
+{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    contain: content;
+}
