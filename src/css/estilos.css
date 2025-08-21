@@ -45,7 +45,6 @@
     grid-template-columns: repeat(3,60px);
     grid-template-rows: repeat(3,60px);
     width: fit-content;
-    
     gap: 30px; 
     row-gap: 10vh;
     column-gap: 12vh;
@@ -113,10 +112,7 @@
     height: 100%;
 }
 
-#btnBox0
-{
-    
-}
+
 
 #turnOf
 {

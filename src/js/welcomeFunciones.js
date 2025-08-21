@@ -34,11 +34,14 @@ btnPvp.addEventListener("click", function()
     window.location.href = "TikTakToe.html";
 })
 
+let botOn = false;
+
 btnPve.addEventListener("click", function()
 {
+    botOn = true;
     window.location.href = "TikTakToe.html";
 })
 
-
+export{botOn}
 
 
