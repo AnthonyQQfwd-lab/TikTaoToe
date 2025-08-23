@@ -29,19 +29,26 @@ btnPve.addEventListener('mouseout', function()
     imgPve.style.display= 'none';
 })
 
+
+
 btnPvp.addEventListener("click", function()
 {
+    let botOn = false;
+    localStorage.setItem("botOn", JSON.stringify(botOn));
     window.location.href = "TikTakToe.html";
+    
 })
 
-let botOn = false;
+
+
 
 btnPve.addEventListener("click", function()
 {
-    botOn = true;
+    let botOn = true;
+    localStorage.setItem("botOn", JSON.stringify(botOn));
     window.location.href = "TikTakToe.html";
 })
 
-export{botOn}
+
 
 

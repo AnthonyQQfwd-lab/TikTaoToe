@@ -85,6 +85,7 @@
 
 #btnsContainer
 {
+    
     position: fixed;
     display: grid;
     background-color: transparent;
@@ -92,6 +93,31 @@
     width: 100%;
     top: 0;
     margin-left: 145%;
+}
+
+#btnBackContainer
+{
+    position: fixed;
+    display: grid;
+    background-color: transparent;
+    height: 50px;
+    width: 50px;
+    top: 0;
+    margin-right: 72%;
+}
+
+#btnBack
+{
+    height: 90px;
+    width: 120px; 
+    border: none;
+    background-color: transparent;
+    background-image: url("../imagenes/btnBack.png");
+    background-size: cover;         
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;  
+    top: 0;
 }
 
 #btnReset

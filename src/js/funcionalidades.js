@@ -1,4 +1,4 @@
-import { botOn } from "./welcomeFunciones";
+
 
 
 
@@ -10,8 +10,9 @@ let matrizGame =
     [null, null, null] 
 ]
 
-let player = "X"
+
 let win;
+let winnerPlayer;
 let gameTurn = 0;
 
 if(gameTurn === 0)
@@ -19,11 +20,23 @@ if(gameTurn === 0)
     win = false;
 }
 
+const botOn = JSON.parse(localStorage.getItem("botOn")) 
+console.log (botOn)
+
+const btnBack = document.getElementById("btnBack");
+btnBack.addEventListener("click", function()
+{
+    let botOn = JSON.parse(localStorage.getItem("botOn")) 
+    botOn = false
+    localStorage.setItem("botOn", JSON.stringify(botOn));
+    window.location.href = "welcome.html";
+})
+
 if(win == false)
 {
     //foreach que recorre toda la clase de btnsboxes y identifica cual a sido presionado y ademas la data guardada de la columna y fila
     const buttons = document.querySelectorAll(".btnsBoxes");
-
+    
     buttons.forEach(button => 
     {
         button.addEventListener("click", () =>
@@ -31,25 +44,31 @@ if(win == false)
             const row = parseInt(button.dataset.row);
             const col = parseInt(button.dataset.col);
             const id = button.dataset.id
-            const position = validarPosicion (id, row, col)
 
-            if(botOn == true && player == "O")
+            let player = getPlayer(gameTurn);
+            if (player == "X" || player == "O")
             {
-                botMove(matrizGame)
-            }
-
-            if(position == true && player == "X")
-            {
-                putPosition(row,col)
+                const position = validarPosicion (id, row, col)
+                if(position === true)
+                {
+                    putPosition(row,col)
+                    
+                }
                 const win = winverification(matrizGame)
-
-
                 btnsOff(win)
             }
-            else
-            {
             
+            
+            player = getPlayer(gameTurn);
+            if(botOn == true && player === "O" && !win)
+            {
+                botMove(matrizGame)
+                const win = winverification(matrizGame)
+                btnsOff(win)
             }
+            
+            
+            console.log(matrizGame)
         })
     })
     
@@ -57,21 +76,18 @@ if(win == false)
 
 function validarPosicion (btnId, row, col)
 {
-    let position = null;
-    while(position == null)
+    let position = false;
+    
+    if(position == false)
     {
-        if(matrizGame[row][col] !== "X" && matrizGame[row][col] !== "O")
+        if(matrizGame[row][col] == null)
         {
-            const player = getPlayer(gameTurn)
+            
             const btnID = document.getElementById(btnId)
+
             btnID.textContent = player
             position = true;
-            gameTurn += 1;
-
             
-
-            
-
             
         }
         else
@@ -87,8 +103,9 @@ function validarPosicion (btnId, row, col)
 const playerPlaying = document.getElementById("playerPlaying")
 function putPosition(row,colunm )
 {
-
+    let player = getPlayer(gameTurn);
     matrizGame[row][colunm] = player;
+    gameTurn += 1;
     playerPlaying.textContent = player;
 
     if(player === "X")
@@ -104,29 +121,54 @@ function putPosition(row,colunm )
     
 }
 
+viewEmpySpaces(matrizGame)
+
+function viewEmpySpaces(matrizGame)
+{
+    let empySpace
+    const empySpacesArray = [];
+    //recorre la matriz game, detectando los espacios bacios y almacenandolos en el array de espacios vacios
+    for(let row = 0; row < 3; row++)
+    {
+        for(let col = 0; col < 3; col++)
+        {
+            if(matrizGame[row][col] === null)
+            {
+                //basado en las filas y columnas se toma a los espacios vacios
+                empySpace = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+                empySpacesArray.push(empySpace)
+            }
+        }
+    }
+    
+    empySpacesArray.map(empySpace => console.log(empySpace.id))
+    return empySpacesArray;
+}
+
 function botMove(matrizGame)
 {
-    
-    const row = Math.floor(Math.random() * 3);
-    const col = Math.floor(Math.random() * 3);
-    const buttonId = document.querySelector(`.btnsBoxes[data-row='${row}'][data-col='${col}']`);
-    const position = validarPosicion (buttonId, row, col)
+    console.log("si entro al bot")
+    let empySpacesArray = viewEmpySpaces(matrizGame)
+    //toamr un espacio vacio random del array de espaciosvacios
+    let randomIndex = Math.floor(Math.random() * empySpacesArray.length);
+    let emptySpace = empySpacesArray[randomIndex]
 
-    if(position == true && player == "O")
+    let spaceId = emptySpace.dataset.id
+    let spaceRow = emptySpace.dataset.row
+    let spaceCol = emptySpace.dataset.col
+    const position = validarPosicion (spaceId, spaceRow, spaceCol)
+
+    if(position == true)
     {
-        putPosition(row,col)
+        putPosition(spaceRow,spaceCol)
         const win = winverification(matrizGame)
-
-
         btnsOff(win)
     }
-    else
-    {
-            
-    }
+    
     
 }
 
+let player;
 function getPlayer(gameTurn)
 {
     if(gameTurn === 0)
@@ -169,8 +211,9 @@ function winverification(matrizGame)
                 {
                     hideTurnOF()
                     win = true;
+                    winnerPlayer = "X"
                     break;
-                    console.log("El jugaodr X gano")
+                    
                 }
             }
             else if(matrizGame[row][col] == 'O')
@@ -181,8 +224,9 @@ function winverification(matrizGame)
                 {
                     hideTurnOF()
                     win = true;
+                    winnerPlayer = "O"
                     break;
-                    console.log("El jugaodr O gano")
+                    
                 }
             }
         }
@@ -202,8 +246,9 @@ function winverification(matrizGame)
                 {
                     hideTurnOF()
                     win = true;
+                    winnerPlayer = "X"
                     break;
-                    console.log("El jugaodr X gano")
+                    
                 }
             }
             else if(matrizGame[col][row] == 'O')
@@ -214,8 +259,9 @@ function winverification(matrizGame)
                 {
                     hideTurnOF()
                     win = true;
+                    winnerPlayer = "O"
                     break;
-                    console.log("El jugaodr O gano")
+                    
                 }
             }
         }
@@ -235,8 +281,9 @@ function winverification(matrizGame)
             {
                 hideTurnOF()
                 win = true;
+                winnerPlayer = "X"
                 break;
-                console.log("X gano")
+                
             }
        }
        if(matrizGame[i][i] == 'O')
@@ -247,24 +294,26 @@ function winverification(matrizGame)
             {
                 hideTurnOF()
                 win = true;
+                winnerPlayer = "O"
                 break;
-                console.log("O gano")
+                
             }
        }
     }
     if(matrizGame[2][0] == "X" && matrizGame[1][1] == "X" && matrizGame[0][2] == "X" )
     {
-        console.log("X gano")
+        winnerPlayer = "X"
         hideTurnOF()
         win = true;
         
     }
     else if(matrizGame[2][0] == "O" && matrizGame[1][1] == "O" && matrizGame[0][2] == "O" )
     {
-        console.log("O gano")
+        winnerPlayer = "O"
         hideTurnOF()
         win = true
     }
+    
     return win;
 }
 
@@ -274,9 +323,10 @@ function btnsOff(win)
     
     if(win === true)
     {
-        console.log("si entro a btnoff")
+        
         document.querySelectorAll(".btnsBoxes").forEach(btn => btn.disabled = true);
-        winnerSign.textContent = `Ganó el jugador: ${player}`;
+        console.log(matrizGame)
+        winnerSign.textContent = `Ganó el jugador: ${winnerPlayer}`;
     }
     else if(gameTurn === 9)
     {
@@ -306,6 +356,8 @@ btnReset.addEventListener("click", function()
     win = false;
     gameTurn = 0
 })
+
+
 
 
 
