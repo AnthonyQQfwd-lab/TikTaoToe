@@ -1,15 +1,9 @@
-
-
-
-
-
 let matrizGame =
 [
     [null, null, null],
     [null, null, null],
     [null, null, null] 
 ]
-
 
 let win;
 let winnerPlayer;
@@ -21,7 +15,7 @@ if(gameTurn === 0)
 }
 
 const botOn = JSON.parse(localStorage.getItem("botOn")) 
-console.log (botOn)
+
 
 const btnBack = document.getElementById("btnBack");
 btnBack.addEventListener("click", function()
@@ -30,7 +24,10 @@ btnBack.addEventListener("click", function()
     botOn = false
     localStorage.setItem("botOn", JSON.stringify(botOn));
     window.location.href = "welcome.html";
+    btnResetScoreboard.click()
 })
+
+
 
 if(win == false)
 {
@@ -44,31 +41,28 @@ if(win == false)
             const row = parseInt(button.dataset.row);
             const col = parseInt(button.dataset.col);
             const id = button.dataset.id
-
             let player = getPlayer(gameTurn);
+            
             if (player == "X" || player == "O")
             {
                 const position = validarPosicion (id, row, col)
                 if(position === true)
                 {
                     putPosition(row,col)
-                    
+                    win = winverification(matrizGame)
+                    btnsOff(win)
                 }
-                const win = winverification(matrizGame)
-                btnsOff(win)
             }
-            
-            
+
             player = getPlayer(gameTurn);
-            if(botOn == true && player === "O" && !win)
+            if(botOn == true && player === "O" && win == false)
             {
                 botMove(matrizGame)
-                const win = winverification(matrizGame)
-                btnsOff(win)
             }
             
             
-            console.log(matrizGame)
+            
+            
         })
     })
     
@@ -92,7 +86,7 @@ function validarPosicion (btnId, row, col)
         }
         else
         {
-            console.log(matrizGame)
+            
             alert("La posicion ya esta ocupada, intentar otra")
             position = false;
         }
@@ -141,13 +135,13 @@ function viewEmpySpaces(matrizGame)
         }
     }
     
-    empySpacesArray.map(empySpace => console.log(empySpace.id))
+    
     return empySpacesArray;
 }
 
 function botMove(matrizGame)
 {
-    console.log("si entro al bot")
+    
     let empySpacesArray = viewEmpySpaces(matrizGame)
     //toamr un espacio vacio random del array de espaciosvacios
     let randomIndex = Math.floor(Math.random() * empySpacesArray.length);
@@ -192,6 +186,57 @@ function hideTurnOF()
     
 }
 
+const winXPointsConteiner = document.getElementById("winXPointsConteiner");
+const winOPointsConteiner = document.getElementById("winOPointsConteiner");
+const gameDrawPointsConteiner = document.getElementById("gameDrawPointsConteiner");
+
+let winXPoints = JSON.parse(localStorage.getItem("winXPointsLocalStorage")) || 0;
+let winOPoints = JSON.parse(localStorage.getItem("winOPointsLocalStorage")) || 0;
+let gameDrawPoints = JSON.parse(localStorage.getItem("gameDrawPointsLocalStorage")) || 0;
+
+showScoreboardPoints()
+
+const btnResetScoreboard = document.getElementById("btnResetScoreboard");
+
+btnResetScoreboard.addEventListener("click", function()
+{
+    gameDrawPoints = 0;
+    localStorage.setItem("gameDrawPointsLocalStorage", JSON.stringify(gameDrawPoints));
+    winXPoints = 0;
+    localStorage.setItem("winXPointsLocalStorage", JSON.stringify(winXPoints));
+    winOPoints = 0;
+    localStorage.setItem("winOPointsLocalStorage", JSON.stringify(winOPoints));
+    showScoreboardPoints()
+})
+
+function showScoreboardPoints()
+{
+    winXPointsConteiner.textContent = winXPoints;
+    winOPointsConteiner.textContent = winOPoints;
+    gameDrawPointsConteiner. textContent = gameDrawPoints;
+}
+
+function addPointScoreboard(winnerPlayer)
+{
+    if(winnerPlayer === null)
+    {
+        gameDrawPoints++
+        localStorage.setItem("gameDrawPointsLocalStorage", JSON.stringify(gameDrawPoints));
+    }
+    else if(winnerPlayer === "X")
+    {
+        winXPoints++ 
+        localStorage.setItem("winXPointsLocalStorage", JSON.stringify(winXPoints));
+    }
+    else if(winnerPlayer === "O")
+    {
+        winOPoints++
+        localStorage.setItem("winOPointsLocalStorage", JSON.stringify(winOPoints));
+    }
+    
+    
+}
+
 function winverification(matrizGame)
 {
     
@@ -209,9 +254,11 @@ function winverification(matrizGame)
                 
                 if(playerXPoint === 3) 
                 {
-                    hideTurnOF()
+                    
                     win = true;
                     winnerPlayer = "X"
+                    
+                    hideTurnOF()
                     break;
                     
                 }
@@ -222,9 +269,10 @@ function winverification(matrizGame)
                 
                 if(playerOPoint === 3)
                 {
-                    hideTurnOF()
                     win = true;
                     winnerPlayer = "O"
+                    
+                    hideTurnOF()
                     break;
                     
                 }
@@ -244,9 +292,11 @@ function winverification(matrizGame)
                 
                 if(playerXPoint === 3) 
                 {
-                    hideTurnOF()
+                    
                     win = true;
                     winnerPlayer = "X"
+                    
+                    hideTurnOF()
                     break;
                     
                 }
@@ -257,11 +307,13 @@ function winverification(matrizGame)
                 
                 if(playerOPoint === 3)
                 {
-                    hideTurnOF()
+                    
                     win = true;
                     winnerPlayer = "O"
-                    break;
+                    hideTurnOF()
                     
+                    break;
+                
                 }
             }
         }
@@ -276,12 +328,14 @@ function winverification(matrizGame)
        if(matrizGame[i][i] == 'X')
        {
             playerXPoint++
-            console.log(playerXPoint)
+            
             if(playerXPoint === 3)
             {
-                hideTurnOF()
+                
                 win = true;
                 winnerPlayer = "X"
+                
+                hideTurnOF()
                 break;
                 
             }
@@ -289,12 +343,14 @@ function winverification(matrizGame)
        if(matrizGame[i][i] == 'O')
        {
             playerOPoint++
-            console.log(playerOPoint)
+            
             if(playerOPoint === 3)
             {
-                hideTurnOF()
+                
                 win = true;
                 winnerPlayer = "O"
+                
+                hideTurnOF()
                 break;
                 
             }
@@ -313,7 +369,7 @@ function winverification(matrizGame)
         hideTurnOF()
         win = true
     }
-    
+    showScoreboardPoints()
     return win;
 }
 
@@ -325,14 +381,18 @@ function btnsOff(win)
     {
         
         document.querySelectorAll(".btnsBoxes").forEach(btn => btn.disabled = true);
-        console.log(matrizGame)
+        addPointScoreboard(winnerPlayer)
+        showScoreboardPoints()
         winnerSign.textContent = `Ganó el jugador: ${winnerPlayer}`;
     }
     else if(gameTurn === 9)
     {
-        hideTurnOF()
+        hideTurnOF();
+        winnerPlayer = null; 
+        addPointScoreboard(winnerPlayer);
+        showScoreboardPoints()
         document.querySelectorAll(".btnsBoxes").forEach(btn => btn.disabled = true);
-        winnerSign.textContent = "Empate"
+        winnerSign.textContent = "Empate";
     }
     
 }
@@ -356,10 +416,3 @@ btnReset.addEventListener("click", function()
     win = false;
     gameTurn = 0
 })
-
-
-
-
-
-
-
