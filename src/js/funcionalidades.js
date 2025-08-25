@@ -38,17 +38,21 @@ if(win == false)
     {
         button.addEventListener("click", () =>
         {
+            //se toma el data- de el boton seleccionado para saber su row y col ademas de la id 
             const row = parseInt(button.dataset.row);
             const col = parseInt(button.dataset.col);
             const id = button.dataset.id
             let player = getPlayer(gameTurn);
             
+
             if (player == "X" || player == "O")
-            {
+            {   // con la row y col y la id extraida del boton presionado se valida si la posicion esta disponible 
                 const position = validarPosicion (id, row, col)
                 if(position === true)
                 {
+                    // si la posicion esta disponible se ejecuta la funcion para tomar la posicion 
                     putPosition(row,col)
+                    // se valida si hay un ganador cada que se pone una posicion valida 
                     win = winverification(matrizGame)
                     btnsOff(win)
                 }
@@ -67,6 +71,7 @@ if(win == false)
     })
     
 }
+
 
 function validarPosicion (btnId, row, col)
 {
@@ -186,18 +191,22 @@ function hideTurnOF()
     
 }
 
+
+// funcionalidades para la scoreboard
+// se optinee los elementos del dom atravez de su id 
 const winXPointsConteiner = document.getElementById("winXPointsConteiner");
 const winOPointsConteiner = document.getElementById("winOPointsConteiner");
 const gameDrawPointsConteiner = document.getElementById("gameDrawPointsConteiner");
 
+// se inicializa el local storage con los datos previamente guardados o si no hay ninguna 0 datos 
 let winXPoints = JSON.parse(localStorage.getItem("winXPointsLocalStorage")) || 0;
 let winOPoints = JSON.parse(localStorage.getItem("winOPointsLocalStorage")) || 0;
 let gameDrawPoints = JSON.parse(localStorage.getItem("gameDrawPointsLocalStorage")) || 0;
 
 showScoreboardPoints()
-
 const btnResetScoreboard = document.getElementById("btnResetScoreboard");
 
+// marca en 0 todos los puntos en la scoreboard ademas deeliminarlos del dom 
 btnResetScoreboard.addEventListener("click", function()
 {
     gameDrawPoints = 0;
@@ -216,6 +225,7 @@ function showScoreboardPoints()
     gameDrawPointsConteiner. textContent = gameDrawPoints;
 }
 
+//cada que gana un jugador se le agregara un punto a su respectico lugar en la scoreboard 
 function addPointScoreboard(winnerPlayer)
 {
     if(winnerPlayer === null)
